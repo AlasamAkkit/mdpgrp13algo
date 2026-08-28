@@ -1,0 +1,54 @@
+def map_strings(strings):
+    output = []
+    index = 0
+
+    for string in strings:
+        parts = string.split('|')
+        if len(parts) > 1:
+            direction_fb = parts[1][0]  # Extract direction (F, B, R, L)
+            direction_lr = parts[1][1]
+            value = parts[1][2:]     # Extract numeric value
+            if direction_fb == "R":
+                mapped_string = f'P___{index}'
+                index += 1
+            else:
+                if direction_lr == "C":
+                    direction_lr = "S"
+                    value = int(value) // 5
+                    mapped_string = f'{direction_lr}{direction_fb}{value:03}'
+                else:
+                    mapped_string = f'{direction_lr}{direction_fb}{value}'
+        else:
+            direction_fb = parts[0][0]  # Extract direction (F, B, R, L)
+            direction_lr = parts[0][1]
+            value = parts[0][2:] 
+        
+        
+        # if direction_fb == 'C':
+        #     mapped_string = f'S{value.zfill(3)}'
+        # elif direction_fb == 'B':
+        #     value = str(int(value) - last_increment)
+        #     mapped_string = f'SB{value.zfill(3)}'
+        # elif direction_fb == 'F':
+        #     mapped_string = f'SF{value.zfill(3)}'
+        # else:
+        #     mapped_string = f'R{direction_fb}{value.zfill(3)}'
+
+        # if direction_fb == 'F':
+        #     if direction_lr == "L":
+        #         mapped_string = f'LF{value.zfill(3)}'
+        #     else:
+
+        # else:
+        #     if direction_lr == "L":
+        #     else:
+
+        output.append(mapped_string)
+
+    return output
+
+# Example usage:
+# input_strings = ['STM|FR090', 'STM|FC050', 'STM|FL090', 'STM|FC100', 'STM|FL090', 'STM|RPI', 'STM|BC100', 'STM|BL090', 'STM|BC050', 'STM|BL090', 'STM|BR090', 'STM|RPI', 'STM|BC100', 'STM|FR090', 'STM|FC150', 'STM|BL090', 'STM|BL090', 'STM|BR090', 'STM|RPI', 'STM|FC100', 'STM|BL090', 'STM|BL090', 'STM|BC200', 'STM|BL090', 'STM|RPI', 'STM|BC100', 'STM|FL090', 'STM|FC450', 'STM|FL090', 'STM|BC100', 'STM|BR090', 'STM|RPI', 'STM|FC100', 'STM|BR090', 'STM|RPI', 'STM|BC250', 'STM|BR090', 'STM|BC150', 'STM|BR090', 'STM|BL090', 'STM|RPI', 'STM|BC050', 'STM|FL090', 'STM|FC200', 'STM|FR090', 'STM|FC350', 'STM|BL090', 'STM|RPI']
+input_strings = ['STM|FR090', 'SF010', 'STM|FL090', 'SF030', 'STM|FL090', 'STM|RPI', 'SB020', 'STM|FL090', 'SB020', 'STM|RPI', 'SB010', 'STM|FL090', 'SF030', 'STM|BR090', 'SB010', 'STM|BR090', 'STM|BL090', 'STM|RPI', 'SF020', 'STM|BL090', 'SF050', 'STM|BL090', 'SB010', 'STM|FL090', 'STM|RPI', 'SB030', 'STM|FL090', 'STM|FR090', 'SB020', 'STM|FL090', 'STM|RPI', 'SB020', 'STM|FL090', 'SF020', 'STM|BR090', 'SB040', 'STM|BR090', 'SF020', 'STM|RPI', 'SB050', 'STM|BR090', 'SB030', 'STM|BR090', 'STM|BL090', 'STM|RPI', 'SB010', 'STM|FL090', 'SF040', 'STM|FR090', 'SF070', 'STM|BL090', 'STM|RPI']
+mapped_strings = map_strings(input_strings)
+print(mapped_strings)
